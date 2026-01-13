@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="smith"
+run/main_scene="uid://bexuvvfk3kpky"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerStats="*res://PlayerStats.gd"
+TimeManager="*res://TimeManager.gd"
+ForgeBackend="*res://ForgeBackend.gd"
 
 [rendering]
 
