@@ -1,4 +1,4 @@
 extends Node
 
-func _ready():
-	print(PlayerStats.PlyrStats["PlyrLvL"])
+func _Forge(Item, Assigned):
+	

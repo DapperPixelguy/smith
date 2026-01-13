@@ -9,3 +9,10 @@ var PlyrStats = {
 	"PlyrXp" = 0,
 	"PlyrReqXp" = 100
 }
+
+var PlyrInv = {
+	"Metal" = 50,
+	"Wood" = 50,
+	"Coal" = 50,
+	"Shillings" = 100
+}
