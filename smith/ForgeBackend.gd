@@ -36,3 +36,4 @@ func _finish_item():
 	PlayerStats.PlyrStats["PlyrXp"] += 10
 	ForgeQueue.remove_at(0)
 	ForgeInactive = true
+	print(PlayerStats.PlyrInv["Stock"])

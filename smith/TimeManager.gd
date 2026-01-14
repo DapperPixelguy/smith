@@ -1,35 +1,39 @@
-# TickManager.gd
 extends Node
 class_name TickManager
 
-# Signals
 signal tick_updated(current_seconds)
 signal day_ended
 
-# Config
-const DAY_LENGTH := 300.0  # seconds per day (5 minutes)
-var time_scale := 1.0      # for fast-forward or slow motion
+const DAY_LENGTH := 300.0
+var time_scale := 1.0
 
-# Internal state
 var seconds_in_day := 0.0
 var ticking := true
+
+var tick_accumulator := 0.0   # <-- NEW
 
 func _process(delta):
 	if not ticking:
 		return
-	
+
+	var scaled_delta : float = delta * time_scale
+
 	# Advance time
-	seconds_in_day += delta * time_scale
-	
-	# Emit tick signal for UI or other listeners
-	emit_signal("tick_updated")
-	
+	seconds_in_day += scaled_delta
+	tick_accumulator += scaled_delta   # <-- accumulate time
+
+	# Emit tick once per second
+	if tick_accumulator >= 1.0:
+		tick_accumulator -= 1.0
+		emit_signal("tick_updated")
+
 	# End of day logic
 	if seconds_in_day >= DAY_LENGTH:
 		_end_day()
 
 func _end_day():
 	seconds_in_day = 0.0
+	tick_accumulator = 0.0
 	emit_signal("day_ended")
 	print("Day ended!")
 
