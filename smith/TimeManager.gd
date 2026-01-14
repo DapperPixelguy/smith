@@ -22,7 +22,7 @@ func _process(delta):
 	seconds_in_day += delta * time_scale
 	
 	# Emit tick signal for UI or other listeners
-	emit_signal("tick_updated", seconds_in_day)
+	emit_signal("tick_updated")
 	
 	# End of day logic
 	if seconds_in_day >= DAY_LENGTH:

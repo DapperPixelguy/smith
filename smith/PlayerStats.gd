@@ -14,5 +14,6 @@ var PlyrInv = {
 	"Metal" = 50,
 	"Wood" = 50,
 	"Coal" = 50,
-	"Shillings" = 100
+	"Shillings" = 100,
+	"Stock" = []
 }

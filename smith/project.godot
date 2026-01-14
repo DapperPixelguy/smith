@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PlayerStats="*res://PlayerStats.gd"
 TimeManager="*res://TimeManager.gd"
 ForgeBackend="*res://ForgeBackend.gd"
+ForgeMould="*res://ForgeMould.gd"
 
 [rendering]
 
