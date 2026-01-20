@@ -65,3 +65,12 @@ func _finish_item():
 	# Mark as inactive (will trigger next item on next tick)
 	ForgeInactive = true
 	ActiveItem = null
+
+func _purchase_res(price):
+	if PlayerStats.PlyrInv["Shillings"] > price:
+		PlayerStats.PlyrInv["Metal"] += 100
+		PlayerStats.PlyrInv["Wood"] += 100
+		PlayerStats.PlyrInv["Coal"] += 100
+		return "Successfully Purchased"
+	else:
+		return "Not enough Money"
