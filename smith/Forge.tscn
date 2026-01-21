@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvormhc0jb8tv"]
+[gd_scene load_steps=8 format=3 uid="uid://bvormhc0jb8tv"]
 
 [ext_resource type="Script" uid="uid://x8330f0tehaj" path="res://forge.gd" id="1_q4uuw"]
 [ext_resource type="Texture2D" uid="uid://d1shuoc4rgjdp" path="res://ForgeScrn.png" id="2_psx6r"]
 [ext_resource type="Texture2D" uid="uid://cff3pg2j2accj" path="res://Hammer.png" id="3_tltx3"]
+[ext_resource type="BitMap" uid="uid://xyhvrhpk5stv" path="res://HammerMask.tres" id="4_wdv8v"]
 
 [sub_resource type="Animation" id="Animation_psx6r"]
 length = 0.001
@@ -98,6 +99,7 @@ texture_pressed = ExtResource("3_tltx3")
 texture_hover = ExtResource("3_tltx3")
 texture_disabled = ExtResource("3_tltx3")
 texture_focused = ExtResource("3_tltx3")
+texture_click_mask = ExtResource("4_wdv8v")
 stretch_mode = 0
 
 [node name="WeaponTray" type="PanelContainer" parent="."]

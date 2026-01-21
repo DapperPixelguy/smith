@@ -15,7 +15,6 @@ scale = Vector2(1.7993054, 1.7993056)
 texture = ExtResource("2_cm0pq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
 offset = Vector2(0, 648)
 transform = Transform2D(1, 0, 0, 1, 0, 648)
 
