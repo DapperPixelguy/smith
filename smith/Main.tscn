@@ -9,6 +9,7 @@ script = ExtResource("1_r0du0")
 
 [node name="MainBack1" type="Sprite2D" parent="."]
 show_behind_parent = true
+texture_filter = 1
 position = Vector2(575.77783, 324.12497)
 scale = Vector2(1.7993054, 1.7993056)
 texture = ExtResource("2_cm0pq")
@@ -18,7 +19,12 @@ layer = 0
 offset = Vector2(0, 648)
 transform = Transform2D(1, 0, 0, 1, 0, 648)
 
+[node name="Forge" parent="CanvasLayer" instance=ExtResource("3_fos0i")]
+z_index = 1
+
 [node name="Button" type="Button" parent="CanvasLayer"]
+top_level = true
+z_index = 2
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -30,5 +36,3 @@ offset_right = 64.0
 offset_bottom = -624.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="Forge" parent="CanvasLayer" instance=ExtResource("3_fos0i")]

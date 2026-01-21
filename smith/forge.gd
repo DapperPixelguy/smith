@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var ButtonContainer = $VBoxContainer
+@onready var ButtonContainer = $PanelContainer/ScrollContainer/VBoxContainer
 
 func _ready():
 	_create_weapon_buttons()

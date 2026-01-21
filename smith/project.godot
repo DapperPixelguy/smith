@@ -22,6 +22,11 @@ TimeManager="*res://TimeManager.gd"
 ForgeBackend="*res://ForgeBackend.gd"
 ForgeMould="*res://ForgeMould.gd"
 
+[display]
+
+window/size/mode=2
+window/stretch/mode="viewport"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
