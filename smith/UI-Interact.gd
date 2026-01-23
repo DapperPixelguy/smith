@@ -1,62 +1,76 @@
 extends Node
+
 var ForgeOpen = false
+var TweenOpen = false
 
 func _ready():
 	TimeManager.day_ended.connect(TickUpdated)
 	$CanvasLayer/Button.pressed.connect(TweenForge)
+	$CanvasLayer2/Button2.pressed.connect(TweenStall)
 	TimeManager.tick_updated.connect(Ledger)
 
 func TickUpdated():
 	return 0
 
 func TweenForge():
-	print("TweenForge called!")
-	print("ForgeOpen is: ", ForgeOpen)
-	print("Current offset: ", $CanvasLayer.offset)
+	# Bring this layer to the front
+	$CanvasLayer.layer = 2
+	$CanvasLayer2.layer = 1
 	
 	var tween = create_tween()
+	var screen_height = get_viewport().get_visible_rect().size.y
 	if ForgeOpen:
-		print("Closing - tweening to: ", get_viewport().get_visible_rect().size.y)
-		tween.tween_property($CanvasLayer, "offset:y", get_viewport().get_visible_rect().size.y, 0.5)
+		# Slide back UP to hide
+		tween.tween_property($CanvasLayer, "offset:y", screen_height, 0.5)
 		ForgeOpen = false
 	else:
-		print("Opening - tweening to: 0")
+		# Slide DOWN to show
 		tween.tween_property($CanvasLayer, "offset:y", 0, 0.5)
 		ForgeOpen = true
+
+func TweenStall():
+	# Bring this layer to the front
+	$CanvasLayer2.layer = 2
+	$CanvasLayer.layer = 1
 	
-	print("New ForgeOpen state: ", ForgeOpen)
+	var tween = create_tween()
+	var screen_height = get_viewport().get_visible_rect().size.y
+	
+	if TweenOpen:
+		tween.tween_property($CanvasLayer2, "offset:y", 0, 0.5)
+		TweenOpen = false
+	else:
+		tween.tween_property($CanvasLayer2, "offset:y", screen_height, 0.5)
+		TweenOpen = true
 
 func Ledger():
-	# 1. Clear the old list so we don't just keep adding rows forever
+	# Clear the current list
 	for child in $LedgerPage.get_children():
 		child.queue_free()
 	
-	# 2. Loop through the Stock and create a row for each item
+	# Rebuild from the current Stock list
 	for i in range(PlayerStats.PlyrInv["Stock"].size()):
 		var item = PlayerStats.PlyrInv["Stock"][i]
-		
-		# Create the Horizontal Row container
 		var row = HBoxContainer.new()
 		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		
-		# Create the Label (Name and Value)
 		var item_info = Label.new()
-		item_info.text = item["Name"] + " — " + str(item["BaseValue"]) + " Shillings"
-		item_info.size_flags_horizontal = Control.SIZE_EXPAND_FILL # Pushes the button to the right
+		item_info.text = item["Name"] + " — " + str(item["BaseVal"]) + " Shillings"
+		item_info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		
-		# Create the Sell Button
 		var sell_btn = Button.new()
-		sell_btn.text = " Sell "
+		sell_btn.text = " Put On Sale "
+		# Bind the current index to the function
+		sell_btn.pressed.connect(_on_sell_pressed.bind(item["Name"], item["BaseVal"], i))
 		
-		# Connect the button - we pass the index 'i' so we know which item to remove
-		sell_btn.pressed.connect(_on_sell_pressed.bind(i))
-		
-		# Assemble the row
 		row.add_child(item_info)
 		row.add_child(sell_btn)
-		
-		# Add the row to your VBox LedgerPage
 		$LedgerPage.add_child(row)
 
-func _on_sell_pressed(index: int):
-	print("KILL YOURSELF ALEX AND GABRIELLA")
+func _on_sell_pressed(item_name: String, price: int, index: int):
+	# If the backend successfully lists the item
+	if ForgeBackend._add_for_sale(item_name, price):
+		# Remove it from the inventory array
+		PlayerStats.PlyrInv["Stock"].pop_at(index)
+		# Refresh the Ledger UI so the item disappears immediately
+		Ledger()
