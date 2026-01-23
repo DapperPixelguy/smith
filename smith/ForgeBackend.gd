@@ -9,7 +9,11 @@ var StallMaxSlots = 10
 signal stall_updated
 
 func _ready():
-	TimeManager.tick_updated.connect(_ForgeTickDown)
+	TimeManager.tick_updated.connect(_OnTick)
+
+func _OnTick():
+	_ForgeTickDown()
+	_CustomerPurchase()
 
 func _ForgeTickDown():
 	if ForgeInactive:
@@ -89,3 +93,43 @@ func pull_from_stall(index: int):
 		# 4. Tell the UI to refresh
 		# (Assuming you have a signal for this)
 		stall_updated.emit()
+
+func _CustomerPurchase():
+	# 1. Identify which slots actually have items
+	var occupied_indices = []
+	for i in range(StallSlots.size()):
+		if StallSlots[i] != null:
+			occupied_indices.append(i)
+	
+	# If stall is empty, no sale can occur
+	if occupied_indices.is_empty():
+		return
+
+	# 2. Pick a random occupied slot to simulate a customer "looking" at it
+	var random_index = occupied_indices.pick_random()
+	var item = StallSlots[random_index]
+
+	# 3. Probability Math
+	# This is where your USP shines: war, season, or renown could modify this float.
+	var base_buy_chance = 0.05 # 15% chance per tick to sell an item
+	var renown_multiplier = 0.01
+	var buy_chance = ((PlayerStats.PlyrStats["Renown"] * renown_multiplier) + 1) * base_buy_chance
+	
+	if randf() < buy_chance:
+		_execute_sale(random_index, item)
+
+func _execute_sale(index, item):
+	var sale_price = item["BaseVal"]
+	
+	# Add the money to the global stats
+	PlayerStats.PlyrInv["Shillings"] += sale_price
+	PlayerStats.PlyrStats["Renown"] += 0.01
+	
+	# Optional: Give a small Renown boost per sale
+	# PlayerStats.PlyrStats["Renown"] += 1 
+
+	# Clear the slot and notify UI
+	StallSlots[index] = null
+	stall_updated.emit()
+	
+	print("SOLD: ", item["Name"], " for ", sale_price, " Shillings.")
