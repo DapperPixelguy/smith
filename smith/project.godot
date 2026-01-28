@@ -21,6 +21,7 @@ PlayerStats="*res://PlayerStats.gd"
 TimeManager="*res://TimeManager.gd"
 ForgeBackend="*res://ForgeBackend.gd"
 ForgeMould="*res://ForgeMould.gd"
+WorldData="*res://WorldData.gd"
 
 [display]
 

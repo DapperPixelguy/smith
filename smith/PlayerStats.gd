@@ -7,7 +7,7 @@ var PlyrStats = {
 	"PlyrLvL": 1,
 	"PlyrXp": 0,
 	"PlyrReqXp": 100,
-	"Renown": 10
+	"Renown": 100
 }
 var PlyrInv = {
 	"Metal": 50,

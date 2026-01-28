@@ -60,8 +60,8 @@ func _finish_item():
 	ActiveItem = null
 
 func _purchase_res(price):
-	if PlayerStats.Shillings >= price:
-		PlayerStats.Shillings -= price
+	if PlayerStats.PlyrInv["Shillings"] >= price:
+		PlayerStats.PlyrInv["Shillings"] -= price
 		PlayerStats.PlyrInv["Metal"] += 100
 		PlayerStats.PlyrInv["Wood"] += 100
 		PlayerStats.PlyrInv["Coal"] += 100
