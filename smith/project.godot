@@ -22,6 +22,10 @@ TimeManager="*res://TimeManager.gd"
 ForgeBackend="*res://ForgeBackend.gd"
 ForgeMould="*res://ForgeMould.gd"
 WorldData="*res://WorldData.gd"
+RelationshipData="*res://RelationshipData.gd"
+EconomyData="*res://EconomyData.gd"
+WarManager="*res://WarManager.gd"
+MaterialData="*res://MaterialData.gd"
 
 [display]
 

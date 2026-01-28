@@ -102,15 +102,27 @@ texture_focused = ExtResource("3_tltx3")
 texture_click_mask = ExtResource("4_wdv8v")
 stretch_mode = 0
 
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 707.0
+offset_top = 326.0
+offset_right = 707.0
+offset_bottom = 326.0
+
 [node name="WeaponTray" type="PanelContainer" parent="."]
 offset_left = 707.0
 offset_top = 326.0
 offset_right = 1007.0
 offset_bottom = 366.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="WeaponTray"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponTray"]
+layout_mode = 2
+
+[node name="MaterialSelectionHBox" type="HBoxContainer" parent="WeaponTray/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="WeaponTray/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WeaponTray/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponTray/VBoxContainer/ScrollContainer"]
 layout_mode = 2
