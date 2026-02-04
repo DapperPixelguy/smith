@@ -35,6 +35,11 @@ layout_mode = 2
 theme_override_constants/separation = 24
 
 [node name="Hammer" type="Sprite2D" parent="."]
-position = Vector2(65, -86)
-scale = Vector2(6, 4)
+position = Vector2(420.00003, -312.5)
+scale = Vector2(38.27273, 14.295455)
+texture = ExtResource("2_uu6xs")
+
+[node name="Hammer2" type="Sprite2D" parent="."]
+position = Vector2(-562, -302)
+scale = Vector2(38.27273, 14.295455)
 texture = ExtResource("2_uu6xs")
