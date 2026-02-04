@@ -11,26 +11,8 @@ config_version=5
 [application]
 
 config/name="smith"
-run/main_scene="uid://gridoenyue7q"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
-
-[autoload]
-
-PlayerStats="*res://PlayerStats.gd"
-TimeManager="*res://TimeManager.gd"
-ForgeBackend="*res://ForgeBackend.gd"
-ForgeMould="*res://ForgeMould.gd"
-WorldData="*res://WorldData.gd"
-RelationshipData="*res://RelationshipData.gd"
-EconomyData="*res://EconomyData.gd"
-WarManager="*res://WarManager.gd"
-MaterialData="*res://MaterialData.gd"
-
-[display]
-
-window/size/mode=2
-window/stretch/mode="viewport"
 
 [rendering]
 
