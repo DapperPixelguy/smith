@@ -6,28 +6,36 @@ extends Node3D
 var is_moving: bool = false
 var current_view: String = "stall" 
 
-# Using _unhandled_input ensures this only fires if the UI didn't use the key first
 func _unhandled_input(event: InputEvent):
 	if is_moving or not event is InputEventKey or not event.pressed:
 		return
 
-	# A (Flick Left)
+	var rotation_offset: float = 0.0
+
 	if event.keycode == KEY_A:
-		var target = 180 if current_view == "stall" else 0
-		_transition_to("forge" if current_view == "stall" else "stall", Vector3(0, target, 0))
-	
-	# D (Flick Right)
+		rotation_offset = 180.0
 	elif event.keycode == KEY_D:
-		var target = -180 if current_view == "stall" else 0 # Or -360 if 0 flips the wrong way
-		_transition_to("forge" if current_view == "stall" else "stall", Vector3(0, target, 0))
+		rotation_offset = -180.0
+	
+	if rotation_offset != 0.0:
+		# Toggle the view name
+		current_view = "forge" if current_view == "stall" else "stall"
+		_rotate_relative(rotation_offset)
 
-	# S (Down to Ledger)
-	elif event.keycode == KEY_S:
-		_transition_to("ledger", Vector3(90, 0, 0))
-
-	# W (Up from Ledger)
-	elif event.keycode == KEY_W and current_view == "ledger":
-		_transition_to("stall", Vector3.ZERO)
+func _rotate_relative(offset: float):
+	is_moving = true
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	
+	# Calculate the new target based on CURRENT rotation
+	var target_y = camera_pivot.rotation_degrees.y + offset
+	
+	tween.tween_property(camera_pivot, "rotation_degrees:y", target_y, transition_time)
+	
+	tween.finished.connect(func(): 
+		is_moving = false
+		# OPTIONAL: Keep degrees between -180 and 180 so they don't grow forever
+		camera_pivot.rotation_degrees.y = fposmod(camera_pivot.rotation_degrees.y + 180.0, 360.0) - 180.0
+	)
 			
 func _transition_to(view_name: String, target_rot: Vector3):
 	print("Rotating to: ", view_name) 
