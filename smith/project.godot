@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="smith"
-run/main_scene="uid://bexuvvfk3kpky"
+run/main_scene="uid://gridoenyue7q"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -47,7 +47,7 @@ func _create_material_tabs():
 	for n in MaterialBar.get_children():
 		n.queue_free()
 		
-	for mat_name in MaterialData.MATERIALS.keys():
+	for mat_name in MaterialData.MATERIALS["Metals"].keys():
 		var btn = Button.new()
 		# Use a short name or icon for the tab
 		btn.text = mat_name.left(5) 
@@ -95,7 +95,7 @@ func _create_weapon_buttons():
 			]
 			
 			# Apply material color to the text
-			var mat_color = MaterialData.MATERIALS[selected_material].get("color", Color.WHITE)
+			var mat_color = MaterialData.MATERIALS["Metals"][selected_material].get("color", Color.WHITE)
 			btn.add_theme_color_override("font_color", mat_color)
 			
 			btn.pressed.connect(_on_weapon_button_pressed.bind(weapon_data))
@@ -104,7 +104,7 @@ func _create_weapon_buttons():
 	_update_button_states()
 
 func _generate_procedural_weapon(mould, mat_name):
-	var mat = MaterialData.MATERIALS[mat_name]
+	var mat = MaterialData.MATERIALS["Metals"][mat_name]
 	
 	return {
 		"Name": mat_name + " " + mould["Name"],

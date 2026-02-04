@@ -1,44 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bexuvvfk3kpky"]
+[gd_scene load_steps=2 format=3 uid="uid://bexuvvfk3kpky"]
 
 [ext_resource type="Script" uid="uid://bfquq7xwa4j1t" path="res://UI-Interact.gd" id="1_r0du0"]
-[ext_resource type="Texture2D" uid="uid://dc32hi0ig7uc6" path="res://MainBack-1.png" id="2_cm0pq"]
-[ext_resource type="PackedScene" uid="uid://bvormhc0jb8tv" path="res://Forge.tscn" id="3_fos0i"]
-[ext_resource type="PackedScene" uid="uid://bf0e6nm10j66k" path="res://Stall.tscn" id="4_cm0pq"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_r0du0")
-
-[node name="MainBack1" type="Sprite2D" parent="."]
-show_behind_parent = true
-texture_filter = 1
-position = Vector2(575.77783, 324.12497)
-scale = Vector2(1.7993054, 1.7993056)
-texture = ExtResource("2_cm0pq")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-offset = Vector2(0, 648)
-transform = Transform2D(1, 0, 0, 1, 0, 648)
-
-[node name="Forge" parent="CanvasLayer" instance=ExtResource("3_fos0i")]
-z_index = 1
-
-[node name="Button" type="Button" parent="CanvasLayer"]
-top_level = true
-z_index = 2
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -65.0
-offset_top = -673.0
-offset_right = 64.0
-offset_bottom = -624.0
-grow_horizontal = 2
-grow_vertical = 0
 
 [node name="LedgerPage" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(250, 345)
+layout_mode = 0
 offset_left = 241.0
 offset_top = 144.0
 offset_right = 912.0
@@ -61,23 +32,3 @@ layout_mode = 2
 [node name="RightPage" type="VBoxContainer" parent="LedgerPage/RightPageScroll"]
 layout_mode = 2
 theme_override_constants/separation = 24
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-
-[node name="Stall" parent="CanvasLayer2" instance=ExtResource("4_cm0pq")]
-position = Vector2(1, -645)
-
-[node name="Button2" type="Button" parent="CanvasLayer2"]
-top_level = true
-z_index = 2
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -65.0
-offset_top = -673.0
-offset_right = 64.0
-offset_bottom = -624.0
-grow_horizontal = 2
-grow_vertical = 0

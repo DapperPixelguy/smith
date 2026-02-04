@@ -18,6 +18,7 @@ var PlyrInv = {
 		"Kingsteel": 0,
 		"Obsidian": 0
 	},
+	"Granite": 0,
 	"Wood": 50,
 	"Coal": 50,
 	"Shillings": 100,

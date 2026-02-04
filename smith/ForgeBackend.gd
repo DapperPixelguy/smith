@@ -88,7 +88,11 @@ func buy_material(material_name: String, kingdom_name: String, amount: int) -> S
 
 func _calculate_price(material_name: String, kingdom_name: String) -> int:
 	var kingdom = WorldData.Kingdom_List[kingdom_name]
-	var base_price = MaterialData.MATERIALS[material_name].get("base_price", 50)
+	var base_price = 0
+	if material_name in MaterialData.MATERIALS["Metals"]:
+		base_price = MaterialData.MATERIALS["Metals"][material_name].get("base_price", 50)
+	else:
+		base_price = MaterialData.MATERIALS[material_name].get("base_price", 50)
 	
 	# Geopolitical Modifiers
 	var stability_mod = 2.0 - kingdom["Stability"] # Low stability = high price
