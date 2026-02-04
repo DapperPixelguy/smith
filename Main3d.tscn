@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://gridoenyue7q"]
+
+[ext_resource type="Script" uid="uid://1on5mouxchhk" path="res://Main-3d.gd" id="1_ly0ex"]
+[ext_resource type="PackedScene" uid="uid://bf0e6nm10j66k" path="res://Stall.tscn" id="1_tp0iu"]
+[ext_resource type="PackedScene" uid="uid://ckru6fomgteda" path="res://ForgeWall.tscn" id="2_6t2qg"]
+[ext_resource type="Script" uid="uid://c1dimg3ptyrfs" path="res://player_head.gd" id="2_cv8oj"]
+[ext_resource type="PackedScene" uid="uid://bexuvvfk3kpky" path="res://Main.tscn" id="3_kpg5t"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tp0iu"]
+viewport_path = NodePath("Front-Front")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kpg5t"]
+viewport_path = NodePath("Back-Front")
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_ly0ex")
+transition_time = 0.3
+
+[node name="Stall" type="Sprite3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 3.2789867)
+texture = SubResource("ViewportTexture_tp0iu")
+
+[node name="Front-Front" type="SubViewport" parent="."]
+size = Vector2i(1146, 647)
+
+[node name="Node2D" parent="Front-Front" instance=ExtResource("1_tp0iu")]
+
+[node name="Back-Front" type="SubViewport" parent="."]
+size = Vector2i(1146, 647)
+
+[node name="Node2D" parent="Back-Front" instance=ExtResource("2_6t2qg")]
+
+[node name="ForgeWall" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.3172183)
+texture = SubResource("ViewportTexture_kpg5t")
+
+[node name="Front-Bottom" type="SubViewport" parent="."]
+size = Vector2i(1146, 647)
+
+[node name="Node2D" parent="Front-Bottom" instance=ExtResource("3_kpg5t")]
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Player_Head" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-0.9999999, -0.00015586574, 0.00051599793, -0.00016589151, 0.99981016, -0.019487213, -0.0005128626, -0.019487297, -0.99981, 0, 0, -0.536134)
+script = ExtResource("2_cv8oj")

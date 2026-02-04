@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bexuvvfk3kpky"]
+
+[ext_resource type="Script" uid="uid://bfquq7xwa4j1t" path="res://UI-Interact.gd" id="1_r0du0"]
+[ext_resource type="Texture2D" uid="uid://cff3pg2j2accj" path="res://Hammer.png" id="2_uu6xs"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_r0du0")
+
+[node name="LedgerPage" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(250, 345)
+layout_mode = 0
+offset_left = 241.0
+offset_top = 144.0
+offset_right = 912.0
+offset_bottom = 489.0
+theme_override_constants/separation = 25
+
+[node name="LeftPageScroll" type="ScrollContainer" parent="LedgerPage"]
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="LeftPage" type="VBoxContainer" parent="LedgerPage/LeftPageScroll"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="RightPageScroll" type="ScrollContainer" parent="LedgerPage"]
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+
+[node name="RightPage" type="VBoxContainer" parent="LedgerPage/RightPageScroll"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Hammer" type="Sprite2D" parent="."]
+position = Vector2(65, -86)
+scale = Vector2(6, 4)
+texture = ExtResource("2_uu6xs")

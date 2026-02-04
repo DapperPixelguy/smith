@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvormhc0jb8tv"]
+
+[ext_resource type="Script" uid="uid://x8330f0tehaj" path="res://forge.gd" id="1_q4uuw"]
+[ext_resource type="Texture2D" uid="uid://d1shuoc4rgjdp" path="res://ForgeScrn.png" id="2_psx6r"]
+[ext_resource type="Texture2D" uid="uid://cff3pg2j2accj" path="res://Hammer.png" id="3_tltx3"]
+[ext_resource type="BitMap" uid="uid://xyhvrhpk5stv" path="res://HammerMask.tres" id="4_wdv8v"]
+
+[sub_resource type="Animation" id="Animation_psx6r"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_q4uuw"]
+resource_name = "slide_in"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.24999999, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_psx6r"]
+_data = {
+&"RESET": SubResource("Animation_psx6r"),
+&"slide_in": SubResource("Animation_q4uuw")
+}
+
+[node name="Forge" type="Node2D"]
+script = ExtResource("1_q4uuw")
+
+[node name="ForgeScrn" type="Sprite2D" parent="."]
+show_behind_parent = true
+z_as_relative = false
+texture_filter = 1
+position = Vector2(576, 324)
+scale = Vector2(1.8, 2.0171876)
+texture = ExtResource("2_psx6r")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_psx6r")
+}
+
+[node name="Hammer" type="TextureButton" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 552.00006
+offset_top = 226.00003
+offset_right = 585.3125
+offset_bottom = 284.82758
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.3336567
+scale = Vector2(5.484375, 5.484375)
+texture_normal = ExtResource("3_tltx3")
+texture_pressed = ExtResource("3_tltx3")
+texture_hover = ExtResource("3_tltx3")
+texture_disabled = ExtResource("3_tltx3")
+texture_focused = ExtResource("3_tltx3")
+texture_click_mask = ExtResource("4_wdv8v")
+stretch_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 707.0
+offset_top = 326.0
+offset_right = 707.0
+offset_bottom = 326.0
+
+[node name="WeaponTray" type="PanelContainer" parent="."]
+offset_left = 707.0
+offset_top = 326.0
+offset_right = 1007.0
+offset_bottom = 366.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponTray"]
+layout_mode = 2
+
+[node name="MaterialSelectionHBox" type="HBoxContainer" parent="WeaponTray/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="WeaponTray/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponTray/VBoxContainer/ScrollContainer"]
+layout_mode = 2
